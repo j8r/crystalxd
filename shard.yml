@@ -1,0 +1,9 @@
+name: crystalxd
+version: 0.0.1
+
+authors:
+  - Julien Reichardt <git@jrei.ch>
+
+description: Client for the LXD REST API
+
+license: ISC
