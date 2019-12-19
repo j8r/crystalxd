@@ -1,0 +1,35 @@
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: format
+  image: jrei/crystal-alpine
+  commands:
+  - crystal tool format --check
+
+- name: build docs
+  image: jrei/crystal-alpine
+  volumes:
+  - name: docs
+    path: /docs
+  commands:
+  - crystal docs -o /docs
+
+- name: publish docs
+  image: jrei/gh-pages-ci
+  volumes:
+  - name: docs
+    path: /docs
+  environment:
+    GIT_USER: Drone CI
+    SITE_TEMP_DIR: /docs
+    SSH_PRIVATE_KEY:
+      from_secret: ssh_private_key
+
+volumes:
+- name: docs
+  temp: {}

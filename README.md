@@ -2,6 +2,7 @@
 
 Crystal client for the [LXD](https://linuxcontainers.org/lxd/) REST API.
 
+[![Build Status](https://cloud.drone.io/api/badges/j8r/crystalxd/status.svg)](https://cloud.drone.io/j8r/crystalxd)
 [![ISC](https://img.shields.io/badge/License-ISC-blue.svg?style=flat-square)](https://en.wikipedia.org/wiki/ISC_license)
 
 ## Prerequisites
@@ -58,6 +59,10 @@ dependencies:
   crystalxd:
     github: j8r/crystalxd
 ```
+
+## Documentation
+
+https://j8r.github.io/crystalxd
 
 ## Usage
 
