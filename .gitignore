@@ -1,2 +1,5 @@
+.shard.lock
+/bin
+/lib
 /certs
 /docs

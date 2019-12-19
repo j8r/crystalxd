@@ -11,6 +11,12 @@ steps:
   commands:
   - crystal tool format --check
 
+- name: lint
+  image: jrei/crystal-alpine
+  commands:
+  - shards install
+  - bin/ameba
+
 - name: build docs
   image: jrei/crystal-alpine
   volumes:
