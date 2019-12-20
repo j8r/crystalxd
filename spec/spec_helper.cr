@@ -18,15 +18,13 @@ def spec_with_container(& : CrystaLXD::Container ->) : Nil
   container = CLIENT.container spec_container_name
   begin
     success = container.create(
-      CrystaLXD::Container::Create.new(
-        ephemeral: true,
-        source: CrystaLXD::Container::Source::Image.new(
-          alias: "alpine/edge",
-          mode: :pull,
-          protocol: :simplestreams,
-          server: "https://images.linuxcontainers.org/"
-        )
-      )
+      source: CrystaLXD::Container::Source::Image.new(
+        alias: "alpine/edge",
+        mode: :pull,
+        protocol: :simplestreams,
+        server: "https://images.linuxcontainers.org/"
+      ),
+      configuration: CrystaLXD::Container::Configuration.new(ephemeral: true)
     ).noerr!
     CLIENT.operation(success).wait.noerr!
     yield container

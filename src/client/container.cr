@@ -10,8 +10,20 @@ struct CrystaLXD::Container
 
   # Create a new container
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#post-optional-targetmember).
-  def create(container : Create) : Success(BackgroundOperation) | Error
-    container.name = @name
+  def create(
+    source : Source::Image | Source::Copy | Source::Migration | Source::None,
+    configuration : Configuration = Configuration.new
+  ) : Success(BackgroundOperation) | Error
+    container = {
+      name:          @name,
+      source:        source,
+      architecture:  configuration.architecture,
+      config:        configuration.config,
+      devices:       configuration.devices,
+      ephemeral:     configuration.ephemeral,
+      instance_type: configuration.instance_type,
+      profiles:      configuration.profiles,
+    }
     @client.post BackgroundOperation, "", container.to_json
   end
 
@@ -23,14 +35,14 @@ struct CrystaLXD::Container
 
   # Replaces container configuration
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-etag-supported-2).
-  def replace_config(config : ConfigUpdate) : Success(BackgroundOperation) | Error
-    @client.put BackgroundOperation, '/' + name, config.to_json
+  def replace_config(configuration : Configuration) : Success(BackgroundOperation) | Error
+    @client.put BackgroundOperation, '/' + name, configuration.to_json
   end
 
   # Update container configuration
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#patch-etag-supported-2).
-  def update_config(config : ConfigUpdate) : Success(Empty) | Error
-    @client.patch Empty, '/' + name, config.to_json
+  def update_config(configuration : Configuration) : Success(Empty) | Error
+    @client.patch Empty, '/' + name, configuration.to_json
   end
 
   # Renames a container
@@ -67,28 +79,10 @@ struct CrystaLXD::Container
       getter instance_type : String?
       # List of profiles.
       getter profiles : Array(String)
-      end
-  end
-
-  struct Create
-    include Base
-
-    protected setter name : String?
-    getter source : Source::Image | Source::Copy | Source::Migration | Source::None
-
-    def initialize(
-      @source : Source::Image | Source::Copy | Source::Migration | Source::None,
-      @architecture : String = "x86_64",
-      @config : Config? = nil,
-      @devices : Hash(String, Hash(String, String))? = nil,
-      @ephemeral : Bool = false,
-      @instance_type : String? = nil,
-      @profiles : Array(String) = ["default"]
-    )
     end
   end
 
-  struct ConfigUpdate
+  struct Configuration
     include Base
 
     def initialize(
