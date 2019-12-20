@@ -10,6 +10,7 @@ struct CrystaLXD::Error
     raise CrystaLXD::Exception.new "#{@error} (code: #{@error_code})"
   end
 
+  # Do not yield. Useful in case of an union with `Success`.
   def success(&)
     self
   end

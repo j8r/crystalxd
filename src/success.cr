@@ -46,6 +46,7 @@ module CrystaLXD
       self
     end
 
+    # Yields self. Useful in case of an union with `Error`.
     def success(&)
       yield self
     end
