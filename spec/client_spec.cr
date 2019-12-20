@@ -6,10 +6,10 @@ describe CrystaLXD::Client do
   end
 
   it "lists containers" do
-    p CLIENT.containers.noerr!
+    CLIENT.containers.noerr!
   end
 
   it "lists operations" do
-    p CLIENT.operations.noerr!
+    CLIENT.operations.noerr!
   end
 end

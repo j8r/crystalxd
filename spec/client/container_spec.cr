@@ -24,7 +24,7 @@ describe CrystaLXD::Container do
   describe "config" do
     it "replaces" do
       spec_with_container do |container|
-        container.replace_config(CrystaLXD::Container::ConfigUpdate.new(instance_type: "c2.micro")).noerr!
+        CLIENT.operation(container.replace_config(CrystaLXD::Container::ConfigUpdate.new(instance_type: "c2.micro")).noerr!).wait.noerr!
       end
     end
 
