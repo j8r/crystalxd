@@ -21,8 +21,6 @@ module CrystaLXD
       Frozen           = 110
       Thawed           = 111
       Success          = 200
-      Failure          = 400
-      Cancelled        = 401
 
       def self.from_json_object_key?(key : String)
         parse key
@@ -49,6 +47,28 @@ module CrystaLXD
     # Yields self. Useful in case of an union with `Error`.
     def success(&)
       yield self
+    end
+  end
+
+  struct BackgroundOperation
+    include JSON::Serializable
+
+    getter id : String,
+      class : String,
+      description : String,
+      created_at : Time,
+      updated_at : Time,
+      status : String,
+      status_code : Success::Code,
+      resources : Resources,
+      metadata : Nil,
+      may_cancel : Bool,
+      err : String,
+      location : String
+
+    struct Resources
+      include JSON::Serializable
+      getter containers : Array(String)
     end
   end
 end

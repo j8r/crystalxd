@@ -13,25 +13,3 @@ struct CrystaLXD::Operation
     @client.get BackgroundOperation, uuid + "/wait"
   end
 end
-
-struct CrystaLXD::BackgroundOperation
-  include JSON::Serializable
-
-  getter id : String,
-    class : String,
-    description : String,
-    created_at : Time,
-    updated_at : Time,
-    status : String,
-    status_code : Success::Code,
-    resources : Resources,
-    metadata : Nil,
-    may_cancel : Bool,
-    err : String,
-    location : String
-
-  struct Resources
-    include JSON::Serializable
-    getter containers : Array(String)
-  end
-end
