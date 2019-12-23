@@ -116,8 +116,8 @@ struct CrystaLXD::Client
   end
 
   # Instantiates a new operation wrapper.
-  def operation(operation_or_uuid : Success(BackgroundOperation) | String) : Operation
-    uuid = operation_or_uuid.is_a?(String) ? operation_or_uuid : operation_or_uuid.metadata.id
+  def operation(operation_or_uuid : Success(BackgroundOperation) | Error | String) : Operation
+    uuid = operation_or_uuid.is_a?(String) ? operation_or_uuid : operation_or_uuid.noerr!.metadata.id
     Operation.new uuid, self
   end
 
