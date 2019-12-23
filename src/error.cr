@@ -2,8 +2,13 @@ struct CrystaLXD::Error
   include JSON::Serializable
 
   enum Code
-    Failure   = 400
-    Cancelled = 401
+    Failure             = 400
+    Cancelled           = 401
+    Forbidden           = 403
+    NotFound            = 404
+    Conflict            = 409
+    PreconditionFailed  = 412
+    InternalServerError = 500
 
     def self.from_json_object_key?(key : String)
       parse key

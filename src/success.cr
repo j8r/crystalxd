@@ -21,6 +21,8 @@ module CrystaLXD
       Frozen           = 110
       Thawed           = 111
       Success          = 200
+      Failure          = 400
+      Cancelled        = 401
 
       def self.from_json_object_key?(key : String)
         parse key
