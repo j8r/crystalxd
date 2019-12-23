@@ -1,7 +1,7 @@
 require "../spec_helper"
 
 describe CrystaLXD::Container do
-  describe "container creation" do
+  describe "creation" do
     it "pulls an image" do
       spec_with_container { }
     end
@@ -40,5 +40,42 @@ describe CrystaLXD::Container do
 
   it "deletes" do
     spec_with_container { }
+  end
+
+  describe "state" do
+    it "restarts" do
+      spec_with_container do |container|
+        CLIENT.operation(container.start).wait
+        assert_background_operation container.restart
+      end
+    end
+
+    it "starts" do
+      spec_with_container do |container|
+        assert_background_operation container.start
+      end
+    end
+
+    it "stops" do
+      spec_with_container do |container|
+        CLIENT.operation(container.start).wait
+        assert_background_operation container.stop
+      end
+    end
+
+    it "freezes" do
+      spec_with_container do |container|
+        CLIENT.operation(container.start).wait
+        assert_background_operation container.freeze
+      end
+    end
+
+    it "unfreezes" do
+      spec_with_container do |container|
+        CLIENT.operation(container.start).wait
+        CLIENT.operation(container.freeze).wait
+        assert_background_operation container.unfreeze
+      end
+    end
   end
 end

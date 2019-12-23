@@ -8,7 +8,7 @@ struct CrystaLXD::Container
     @client.api_path = @client.api_path + "/containers"
   end
 
-  # Create a new container
+  # Creates a new container
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#post-optional-targetmember).
   def create(
     source : Source::Image | Source::Copy | Source::Migration | Source::None,
@@ -27,7 +27,7 @@ struct CrystaLXD::Container
     @client.post BackgroundOperation, "", container.to_json
   end
 
-  # Container configuration and current state
+  # Returns container configuration and current state
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#get-5).
   def information : Success(Information) | Error
     @client.get Information, '/' + @name
@@ -39,7 +39,7 @@ struct CrystaLXD::Container
     @client.put BackgroundOperation, '/' + name, configuration.to_json
   end
 
-  # Update container configuration
+  # Updates container configuration
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#patch-etag-supported-2).
   def update_config(configuration : Configuration) : Success(Empty) | Error
     @client.patch Empty, '/' + name, configuration.to_json
@@ -61,6 +61,44 @@ struct CrystaLXD::Container
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#delete-1).
   def delete : Success(BackgroundOperation) | Error
     @client.delete BackgroundOperation, '/' + @name
+  end
+
+  # Restarts the container
+  # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).
+  def restart(force : Bool = true, timeout : Int32? = nil) : Success(BackgroundOperation) | Error
+    handle_action Action.new "restart", timeout: timeout, force: force
+  end
+
+  # Starts the container
+  # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).
+  def start(stateful : Bool = false, timeout : Int32? = nil) : Success(BackgroundOperation) | Error
+    handle_action Action.new "start", timeout: timeout, stateful: stateful
+  end
+
+  # Stops the container
+  # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).
+  def stop(force : Bool = true, stateful : Bool = false, timeout : Int32? = nil) : Success(BackgroundOperation) | Error
+    handle_action Action.new "stop", timeout: timeout, force: force, stateful: stateful
+  end
+
+  # Freezes the container
+  # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).
+  def freeze(timeout : Int32? = nil) : Success(BackgroundOperation) | Error
+    handle_action Action.new "freeze", timeout
+  end
+
+  # Unfreezes the container
+  # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).
+  def unfreeze(timeout : Int32? = nil) : Success(BackgroundOperation) | Error
+    handle_action Action.new "unfreeze", timeout
+  end
+
+  private def handle_action(action : Action)
+    @client.put BackgroundOperation, '/' + @name + "/state", action.to_json
+  end
+
+  private record Action, action : String, timeout : Int32? = nil, force : Bool? = nil, stateful : Bool? = nil do
+    include JSON::Serializable
   end
 
   module Base

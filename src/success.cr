@@ -63,7 +63,7 @@ module CrystaLXD
       status : String,
       status_code : Success::Code,
       resources : Resources,
-      metadata : Nil,
+      metadata : JSON::Any,
       may_cancel : Bool,
       err : String,
       location : String

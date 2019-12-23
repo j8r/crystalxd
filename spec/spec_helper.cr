@@ -29,8 +29,14 @@ def spec_with_container(& : CrystaLXD::Container ->) : Nil
     CLIENT.operation(operation).wait.noerr!
     yield container
   ensure
-    container.delete.noerr!
+    container.stop
+    container.delete
   end
+end
+
+def assert_background_operation(operation : CrystaLXD::Success(CrystaLXD::BackgroundOperation) | CrystaLXD::Error)
+  result = CLIENT.operation(operation).wait.noerr!
+  result.metadata.status_code.success?.should be_true
 end
 
 Spec.after_suite do
