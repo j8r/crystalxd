@@ -63,6 +63,12 @@ struct CrystaLXD::Container
     @client.delete BackgroundOperation, '/' + @name
   end
 
+  # Returns the current state
+  # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#get-9).
+  def state : Success(State) | Error
+    @client.get State, '/' + @name + "/state"
+  end
+
   # Restarts the container
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).
   def restart(force : Bool = true, timeout : Int32? = nil) : Success(BackgroundOperation) | Error
@@ -270,5 +276,42 @@ struct CrystaLXD::Container
 
       @type = "none"
     end
+  end
+
+  struct State
+    include JSON::Serializable
+
+    record CPU, usage : Int64 { include JSON::Serializable }
+    record Disk, usage : Int64 { include JSON::Serializable }
+    record Memory, usage : Int64, usage_peak : Int64, swap_usage : Int64, swap_usage_peak : Int64 do
+      include JSON::Serializable
+    end
+
+    struct Network
+      include JSON::Serializable
+      record Address, family : String, address : String, netmask : String, scope : String do
+        include JSON::Serializable
+      end
+      record Counter, bytes_received : Int64, bytes_sent : Int64, packets_received : Int64, packets_sent : Int64 do
+        include JSON::Serializable
+      end
+
+      getter addresses : Array(Address)
+      getter counters : Counter
+      getter hwaddr : String
+      getter host_name : String
+      getter mtu : Int64
+      getter state : String
+      getter type : String
+    end
+
+    getter status : String
+    getter status_code : Success::Code
+    getter cpu : CPU
+    getter disk : Hash(String, Disk)?
+    getter network : Hash(String, Network)?
+    getter memory : Memory
+    getter pid : Int64
+    getter processes : Int64
   end
 end

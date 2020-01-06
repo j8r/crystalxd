@@ -42,7 +42,22 @@ describe CrystaLXD::Container do
     spec_with_container { }
   end
 
-  describe "state" do
+  describe "shows state" do
+    it "stopped container" do
+      spec_with_container do |container|
+        container.state.noerr!
+      end
+    end
+
+    it "running container" do
+      spec_with_container do |container|
+        CLIENT.operation(container.start).wait
+        container.state.noerr!
+      end
+    end
+  end
+
+  describe "modify state" do
     it "restarts" do
       spec_with_container do |container|
         CLIENT.operation(container.start).wait
