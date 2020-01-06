@@ -34,8 +34,8 @@ In this directory, create self-signed certificates:
 mkdir -p certs && cd certs
 
 openssl ecparam -name secp521r1 -genkey -noout -out lxd.key
-openssl req -new -sha256 -newkey rsa:4096 -days 365 -key lxd.key -out lxd.csr -subj "/CN=CrystaLXD specs"
-openssl x509 -signkey lxd.key -in lxd.csr -req -out lxd.crt
+openssl req -new -sha256 -newkey rsa:4096 -key lxd.key -out lxd.csr -subj "/CN=CrystaLXD specs"
+openssl x509 -days 365 -signkey lxd.key -in lxd.csr -req -out lxd.crt
 ```
 
 Then add the certificate to the trust store:
