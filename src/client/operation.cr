@@ -3,7 +3,7 @@ struct CrystaLXD::Operation
   getter uuid : String
   @client : Client
 
-  def initialize(@uuid : String, @client : Client)
+  def initialize(@client : Client, @uuid : String)
     @client.api_path = @client.api_path + "/operations/"
   end
 

@@ -4,7 +4,7 @@ struct CrystaLXD::Container
   getter name : String
   @client : Client
 
-  def initialize(@name : String, @client : Client)
+  def initialize(@client : Client, @name : String)
     @client.api_path = @client.api_path + "/containers"
   end
 

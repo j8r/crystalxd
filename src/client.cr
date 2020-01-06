@@ -106,7 +106,7 @@ struct CrystaLXD::Client
 
   # Instantiates a new container wrapper.
   def container(name : String) : Container
-    Container.new name, self
+    Container.new self, name
   end
 
   # List of containers, or URLs of containers, this server publishes
@@ -118,7 +118,7 @@ struct CrystaLXD::Client
   # Instantiates a new operation wrapper.
   def operation(operation_or_uuid : Success(BackgroundOperation) | Error | String) : Operation
     uuid = operation_or_uuid.is_a?(String) ? operation_or_uuid : operation_or_uuid.noerr!.metadata.id
-    Operation.new uuid, self
+    Operation.new self, uuid
   end
 
   # List of operations, or URLs of operations, that are currently going on/queued
