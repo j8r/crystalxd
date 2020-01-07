@@ -27,6 +27,47 @@ struct CrystaLXD::Container
     @client.post BackgroundOperation, "", container.to_json
   end
 
+  # Runs a remote command
+  # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#10containersnameexec).
+  #
+  # `command`: Command and arguments
+  # `environment`: Optional extra environment variables to set
+  # `wait_for_websocket`: Whether to wait for a connection before starting the process
+  # `record_output`: Whether to store stdout and stderr (only valid with wait-for-websocket=false) (requires API extension container_exec_recording)
+  # `interactive`: Whether to allocate a pts device instead of PIPEs
+  # `width`: Initial width of the terminal (optional)
+  # `height`: Initial height of the terminal (optional)
+  # `user`: User to run the command as (optional)
+  # `group`: Group to run the command as (optional)
+  # `cwd`: Current working directory (optional)
+  def exec(
+    command : Enumerable(String),
+    environment : Hash(String, String)? = nil,
+    wait_for_websocket : Bool = true,
+    record_output : Bool = false,
+    interactive : Bool = true,
+    width : Int32? = nil,
+    height : Int32? = nil,
+    user : Int32? = nil,
+    group : Int32? = nil,
+    cwd : String? = nil
+  ) : Success(BackgroundOperation) | Error
+    exec_options = {
+      command:              command,
+      environment:          environment,
+      "wait-for-websocket": wait_for_websocket,
+      "record-output":      record_output,
+      interactive:          interactive,
+      width:                width,
+      height:               height,
+      user:                 user,
+      group:                group,
+      cwd:                  cwd,
+    }
+
+    @client.post BackgroundOperation, '/' + name + "/exec", exec_options.to_json
+  end
+
   # Returns container configuration and current state
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#get-5).
   def information : Success(Information) | Error

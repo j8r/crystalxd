@@ -13,6 +13,15 @@ describe CrystaLXD::Container do
     end
   end
 
+  describe "exec" do
+    it "websocket" do
+      spec_with_container do |container|
+        CLIENT.operation(container.start).wait
+        container.exec({"ls"}).noerr!
+      end
+    end
+  end
+
   it "renames" do
     spec_with_container do |container|
       new_container_name = spec_container_name

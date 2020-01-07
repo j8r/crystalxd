@@ -20,10 +20,9 @@ struct CrystaLXD::Client
     port : Int32,
     tls : OpenSSL::SSL::Context::Client
 
-  protected property api_path : String
+  protected property api_path : String = ""
 
   def initialize(@tls : OpenSSL::SSL::Context::Client, @host : String = "[::1]", @port : Int32 = 8443, path : String = "/")
-    @api_path = ""
     @api_path = get(Array(String), path).noerr!.metadata.last
   end
 
