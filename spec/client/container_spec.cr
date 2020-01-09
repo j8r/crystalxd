@@ -25,7 +25,7 @@ describe CrystaLXD::Container do
   it "renames" do
     spec_with_container do |container|
       new_container_name = spec_container_name
-      container.rename(new_container_name).noerr!
+      CLIENT.operation(container.rename(new_container_name).noerr!).wait
       CLIENT.container(new_container_name).rename(container.name).noerr!
     end
   end

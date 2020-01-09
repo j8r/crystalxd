@@ -86,7 +86,7 @@ struct CrystaLXD::Container
     @client.patch Empty, '/' + name, configuration.to_json
   end
 
-  # Renames a container
+  # Renames this container
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#post-optional-targetmember-1).
   def rename(new_name : String) : Success(BackgroundOperation) | Error
     @client.post BackgroundOperation, '/' + @name, %({"name": "#{new_name}"})
@@ -98,7 +98,7 @@ struct CrystaLXD::Container
     @client.put BackgroundOperation, '/' + @name, %({"restore": "#{snapshot_name}"})
   end
 
-  # Removes the container
+  # Removes this container
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#delete-1).
   def delete : Success(BackgroundOperation) | Error
     @client.delete BackgroundOperation, '/' + @name
@@ -110,31 +110,31 @@ struct CrystaLXD::Container
     @client.get State, '/' + @name + "/state"
   end
 
-  # Restarts the container
+  # Restarts this container
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).
   def restart(force : Bool = true, timeout : Int32? = nil) : Success(BackgroundOperation) | Error
     handle_action Action.new "restart", timeout: timeout, force: force
   end
 
-  # Starts the container
+  # Starts this container
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).
   def start(stateful : Bool = false, timeout : Int32? = nil) : Success(BackgroundOperation) | Error
     handle_action Action.new "start", timeout: timeout, stateful: stateful
   end
 
-  # Stops the container
+  # Stops this container
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).
   def stop(force : Bool = true, stateful : Bool = false, timeout : Int32? = nil) : Success(BackgroundOperation) | Error
     handle_action Action.new "stop", timeout: timeout, force: force, stateful: stateful
   end
 
-  # Freezes the container
+  # Freezes this container
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).
   def freeze(timeout : Int32? = nil) : Success(BackgroundOperation) | Error
     handle_action Action.new "freeze", timeout
   end
 
-  # Unfreezes the container
+  # Unfreezes this container
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).
   def unfreeze(timeout : Int32? = nil) : Success(BackgroundOperation) | Error
     handle_action Action.new "unfreeze", timeout

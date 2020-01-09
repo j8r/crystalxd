@@ -1,4 +1,5 @@
 require "json"
+require "openssl"
 require "http/client"
 require "./error"
 require "./success"
@@ -16,20 +17,13 @@ require "./client/*"
 # ```
 #
 struct CrystaLXD::Client
-  getter host : String,
-    port : Int32,
-    tls : OpenSSL::SSL::Context::Client
+  getter http_client : HTTP::Client
 
   protected property api_path : String = ""
 
-  def initialize(@tls : OpenSSL::SSL::Context::Client, @host : String = "[::1]", @port : Int32 = 8443, path : String = "/")
+  def initialize(tls : OpenSSL::SSL::Context::Client, host : String = "::1", port : Int32 = 8443, path : String = "/")
+    @http_client = HTTP::Client.new host, port, tls
     @api_path = get(Array(String), path).noerr!.metadata.last
-  end
-
-  def http_client(& : HTTP::Client ->)
-    HTTP::Client.new @host, @port, @tls do |client|
-      yield client
-    end
   end
 
   def parse_response(klass : U.class, response) : Success(U) | Error forall U
@@ -42,7 +36,7 @@ struct CrystaLXD::Client
 
   {% for method in %w(get post put patch delete) %}
   def {{method.id}}(klass : U.class, path : String = "", body = nil) : Success(U) | Error forall U
-    http_client &.{{method.id}} path: @api_path + path, body: body do |response|
+    @http_client.{{method.id}} path: @api_path + path, body: body do |response|
       parse_response U, response
     end
   end
