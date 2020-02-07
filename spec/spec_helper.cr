@@ -39,7 +39,9 @@ def assert_background_operation(operation : CrystaLXD::Success(CrystaLXD::Backgr
   result.metadata.status_code.success?.should be_true
 end
 
-Spec.after_suite do
+# Using `Spec.after_suite` returns:
+# Error running at_exit handler: not found (code: NotFound)
+at_exit do
   CLIENT.containers.success &.metadata.each do |container_name|
     if container_name.starts_with? SPEC_CONTAINER_PREFIX
       CLIENT.container(container_name).stop

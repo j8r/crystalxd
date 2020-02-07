@@ -19,7 +19,8 @@ require "./client/*"
 struct CrystaLXD::Client
   getter http_client : HTTP::Client
 
-  protected property api_path : String = ""
+  protected property endpoint_path : String = ""
+  getter api_path : String = ""
 
   def initialize(tls : OpenSSL::SSL::Context::Client, host : String = "::1", port : Int32 = 8443, path : String = "/")
     @http_client = HTTP::Client.new host, port, tls
@@ -36,11 +37,15 @@ struct CrystaLXD::Client
 
   {% for method in %w(get post put patch delete) %}
   def {{method.id}}(klass : U.class, path : String = "", body = nil) : Success(U) | Error forall U
-    @http_client.{{method.id}} path: @api_path + path, body: body do |response|
+    @http_client.{{method.id}} path: @api_path + @endpoint_path + path, body: body do |response|
       parse_response U, response
     end
   end
   {% end %}
+
+  def websocket(path : String)
+    HTTP::WebSocket.new host: http_client.host, port: http_client.port, path: @api_path + @endpoint_path + path, tls: @http_client.tls
+  end
 
   struct Information
     include JSON::Serializable

@@ -1,5 +1,13 @@
 require "../spec_helper"
 
+def assert_websocket_exec(exec)
+  spec_with_container do |container|
+    CLIENT.operation(container.start).wait
+    op = container.exec_websocket(exec) { }
+    op.wait.noerr!
+  end
+end
+
 describe CrystaLXD::Container do
   describe "creation" do
     it "pulls an image" do
@@ -14,10 +22,44 @@ describe CrystaLXD::Container do
   end
 
   describe "exec" do
-    it "websocket" do
+    it "direct without websocket" do
       spec_with_container do |container|
+        exec = CrystaLXD::Container::Exec.new command: ["/bin/ls"], cwd: "/"
         CLIENT.operation(container.start).wait
-        container.exec({"ls"}).noerr!
+        op = container.exec_direct(exec).noerr!
+        CLIENT.operation(op).wait.noerr!
+      end
+    end
+
+    describe "websocket" do
+      it "sends an input to stdin" do
+        spec_with_container do |container|
+          exec = CrystaLXD::Container::Exec.new command: ["cat", "-"], cwd: "/"
+          exec.on_stdout do |bytes|
+            String.new(bytes).should eq "input"
+          end
+          CLIENT.operation(container.start).wait
+          op = container.exec_websocket exec do |stdin_ws|
+            stdin_ws.send "input"
+          end
+          op.wait.noerr!
+        end
+      end
+
+      it "runs an operation on stdout" do
+        exec = CrystaLXD::Container::Exec.new command: ["printf", "output"], cwd: "/"
+        exec.on_stdout do |bytes|
+          String.new(bytes).should eq "output"
+        end
+        assert_websocket_exec exec
+      end
+
+      it "runs an operation on stderr" do
+        exec = CrystaLXD::Container::Exec.new command: ["printf", "error"], cwd: "/"
+        exec.on_stderr do |bytes|
+          String.new(bytes).should eq "error"
+        end
+        assert_websocket_exec exec
       end
     end
   end

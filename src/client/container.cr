@@ -1,11 +1,14 @@
 # https://github.com/lxc/lxd/blob/master/doc/rest-api.md#10containers
+#
+# This object is instantiated through `CrystaLXD::Client#container`
+#
 struct CrystaLXD::Container
   # 64 chars max, ASCII, no slash, no colon and no comma.
   getter name : String
   @client : Client
 
   def initialize(@client : Client, @name : String)
-    @client.api_path = @client.api_path + "/containers"
+    @client.endpoint_path = "/containers"
   end
 
   # Creates a new container
@@ -27,45 +30,71 @@ struct CrystaLXD::Container
     @client.post BackgroundOperation, "", container.to_json
   end
 
-  # Runs a remote command
+  # Runs a remote command directly, without any wait for websocket connection
+  # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#10containersnameexec).
+  def exec_direct(exec : Exec) : Success(BackgroundOperation) | Error
+    @client.post BackgroundOperation, '/' + name + "/exec", exec.to_json
+  end
+
+  # Runs a remote command and wait for a websocket connection before starting the process
   # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#10containersnameexec).
   #
-  # `command`: Command and arguments
-  # `environment`: Optional extra environment variables to set
-  # `wait_for_websocket`: Whether to wait for a connection before starting the process
-  # `record_output`: Whether to store stdout and stderr (only valid with wait-for-websocket=false) (requires API extension container_exec_recording)
-  # `interactive`: Whether to allocate a pts device instead of PIPEs
-  # `width`: Initial width of the terminal (optional)
-  # `height`: Initial height of the terminal (optional)
-  # `user`: User to run the command as (optional)
-  # `group`: Group to run the command as (optional)
-  # `cwd`: Current working directory (optional)
-  def exec(
-    command : Enumerable(String),
-    environment : Hash(String, String)? = nil,
-    wait_for_websocket : Bool = true,
-    record_output : Bool = false,
-    interactive : Bool = true,
-    width : Int32? = nil,
-    height : Int32? = nil,
-    user : Int32? = nil,
-    group : Int32? = nil,
-    cwd : String? = nil
-  ) : Success(BackgroundOperation) | Error
-    exec_options = {
-      command:              command,
-      environment:          environment,
-      "wait-for-websocket": wait_for_websocket,
-      "record-output":      record_output,
-      interactive:          interactive,
-      width:                width,
-      height:               height,
-      user:                 user,
-      group:                group,
-      cwd:                  cwd,
-    }
+  # Yields the stdin and control websockets (in this order).
+  #
+  # The control websocket can be used to send out-of-band messages during an exec session.
+  # This is currently used for window size changes and for forwarding of signals.
+  #
+  # ```
+  # require "crystalxd"
+  #
+  # exec = CrystaLXD::Container::Exec.new command: ["/bin/ls"], cwd: "/"
+  # exec.on_stdout do |bytes|
+  #   STDOUT.write bytes
+  # end
+  # mycontainer.exec_websocket exec do |stdin_ws, contol_ws|
+  # end
+  # ```
+  def exec_websocket(exec : Exec, & : HTTP::WebSocket, HTTP::WebSocket ->) : Operation
+    exec.wait_for_websocket = true
 
-    @client.post BackgroundOperation, '/' + name + "/exec", exec_options.to_json
+    result = exec_direct(exec).noerr!
+    op = @client.operation result
+
+    stdin_channel = Channel(HTTP::WebSocket).new
+    control_channel = Channel(HTTP::WebSocket).new
+
+    # Yields 4 streams in the following order: `0` (stdin), `1` (stdout), `2` (stderr), `control`
+    result.metadata.metadata["fds"].as_h.each do |fd, secret|
+      spawn do
+        ws = op.websocket secret.as_s
+        case fd
+        when "0"
+          stdin_channel.send ws
+        when "1"
+          ws.on_binary do |io|
+            exec.on_stdout.call io
+          end
+        when "2"
+          ws.on_binary do |io|
+            exec.on_stderr.call io
+          end
+        when "control"
+          control_channel.send ws
+        end
+        ws.run
+      end
+    end
+
+    stdin_ws = stdin_channel.receive
+    control_ws = control_channel.receive
+    begin
+      yield stdin_ws, control_ws
+    ensure
+      stdin_ws.close
+      control_ws.close
+    end
+
+    op
   end
 
   # Returns container configuration and current state
@@ -203,21 +232,21 @@ struct CrystaLXD::Container
       @type = "image"
 
       # Name of the alias.
-      getter alias : String
+      property alias : String
       # "local" is the default if not specified.
-      getter mode : Mode
+      property mode : Mode
       # Secret to use to retrieve the image (pull mode only).
-      getter secret : String?
+      property secret : String?
       # Remote server (pull mode only).
-      getter server : String?
+      property server : String?
       # Optional PEM certificate. If not mentioned, system CA is used.
-      getter certificate : String?
+      property certificate : String?
       # Protocol.
-      getter protocol : Protocol
+      property protocol : Protocol
       # Fingerprint.
-      getter fingerprint : String?
+      property fingerprint : String?
       # Container based on most recent match based on image properties.
-      getter properties : Hash(String, String)?
+      property properties : Hash(String, String)?
 
       def initialize(
         @alias : String,
@@ -254,19 +283,19 @@ struct CrystaLXD::Container
       include JSON::Serializable
       @type = "migration"
 
-      getter mode : Mode
+      property mode : Mode
       @[JSON::Field(key: "base-image")]
       # Optional, the base image the container was created from.
-      getter base_image : String?
+      property base_image : String?
       # Whether to migrate only the container without snapshots.
-      getter container_only : Bool
+      property container_only : Bool
       # Whether migration is performed live.
-      getter live : Bool
+      property live : Bool
       # Full URL to the remote operation (pull mode only).
-      getter operation : String?
+      property operation : String?
       # Optional PEM certificate. If not mentioned, system CA is used.
-      getter certificate : String?
-      getter secrets : Secrets
+      property certificate : String?
+      property secrets : Secrets
 
       # Secrets to use when talking to the migration source.
       record Secrets, control : String, criu : String, fs : String do
@@ -354,5 +383,70 @@ struct CrystaLXD::Container
     getter memory : Memory
     getter pid : Int64
     getter processes : Int64
+  end
+
+  # Exec options
+  # (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#10containersnameexec).
+  struct Exec
+    include JSON::Serializable
+
+    # Command and arguments.
+    property command : Array(String)
+    # Current working directory (optional).
+    property cwd : String?
+    # Optional extra environment variables to set.
+    property environment : Hash(String, String)?
+    @[JSON::Field(key: "wait-for-websocket")]
+    # Whether to wait for a connection before starting the process
+    protected setter wait_for_websocket : Bool = false
+    # `interactive`: Whether to allocate a pts device instead of PIPEs.
+    protected setter interactive : Bool = false
+    # Whether to store stdout and stderr (only valid with wait-for-websocket=false) (requires API extension container_exec_recording).
+    protected setter record_output : Bool = false
+    # Initial width of the terminal (optional).
+    property width : Int32?
+    # Initial height of the terminal (optional).
+    property height : Int32?
+    # User to run the command as (optional).
+    property user : Int32?
+    # Group to run the command as (optional).
+    property group : Int32?
+
+    @[JSON::Field(ignore: true)]
+    protected getter on_stdout : Proc(Bytes, Nil) = ->(x : Bytes) {}
+    @[JSON::Field(ignore: true)]
+    protected getter on_stderr : Proc(Bytes, Nil) = ->(x : Bytes) {}
+
+    def initialize(
+      @command : Array(String),
+      @environment : Hash(String, String)? = nil,
+      @record_output : Bool = false,
+      @width : Int32? = nil,
+      @height : Int32? = nil,
+      @user : Int32? = nil,
+      @group : Int32? = nil,
+      @cwd : String? = nil
+    )
+    end
+
+    # Registers a proc operation to execute on stdout outputs.
+    # ```
+    # exec = CrystaLXD::Container::Exec.new
+    # exec.on_stdout do |bytes|
+    #   STDOUT.write bytes
+    # end
+    # ```
+    def on_stdout(&@on_stdout : Bytes ->)
+    end
+
+    # Registers a proc operation to execute on stderr outputs.
+    # ```
+    # exec = CrystaLXD::Container::Exec.new
+    # exec.on_stderr do |bytes|
+    #   STDERR.write bytes
+    # end
+    # ```
+    def on_stderr(&@on_stderr : Bytes ->)
+    end
   end
 end

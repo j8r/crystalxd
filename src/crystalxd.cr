@@ -1,4 +1,4 @@
-require "./*"
+require "./client"
 require "json"
 
 module CrystaLXD
