@@ -13,7 +13,7 @@ Crystal client for the [LXD](https://linuxcontainers.org/lxd/) REST API.
 
 Add yourself to the lxd group, so you can run lxc without being root:
 
-`sudo adduser $USER lxd`
+`sudo usermod -aG lxd $USER`
 
 Then logout and login again.
 
