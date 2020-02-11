@@ -54,7 +54,7 @@ struct CrystaLXD::Container
   # mycontainer.exec_websocket exec do |stdin_ws, contol_ws|
   # end
   # ```
-  def exec_websocket(exec : Exec, & : HTTP::WebSocket, HTTP::WebSocket ->) : Operation
+  def exec_websocket(exec : Exec, &) : Success(CrystaLXD::BackgroundOperation) | Error
     exec.wait_for_websocket = true
 
     result = exec_direct(exec).noerr!
@@ -62,6 +62,7 @@ struct CrystaLXD::Container
 
     stdin_channel = Channel(HTTP::WebSocket).new
     control_channel = Channel(HTTP::WebSocket).new
+    stdout_stderr_channel = Channel(HTTP::WebSocket).new
 
     # Yields 4 streams in the following order: `0` (stdin), `1` (stdout), `2` (stderr), `control`
     result.metadata.metadata["fds"].as_h.each do |fd, secret|
@@ -74,12 +75,16 @@ struct CrystaLXD::Container
           ws.on_binary do |io|
             exec.on_stdout.call io
           end
+          stdout_stderr_channel.send ws
         when "2"
           ws.on_binary do |io|
             exec.on_stderr.call io
           end
+          stdout_stderr_channel.send ws
         when "control"
           control_channel.send ws
+        else
+          ws.close
         end
         ws.run
       end
@@ -89,12 +94,17 @@ struct CrystaLXD::Container
     control_ws = control_channel.receive
     begin
       yield stdin_ws, control_ws
+      # Wait for the operation to finish before closing websockets
+      op_result = op.wait
     ensure
       stdin_ws.close
       control_ws.close
+      2.times do
+        stdout_stderr_channel.receive.close
+      end
     end
 
-    op
+    op_result
   end
 
   # Returns container configuration and current state

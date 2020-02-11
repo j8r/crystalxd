@@ -4,7 +4,7 @@ def assert_websocket_exec(exec)
   spec_with_container do |container|
     CLIENT.operation(container.start).wait
     op = container.exec_websocket(exec) { }
-    op.wait.noerr!
+    op.noerr!
   end
 end
 
@@ -42,7 +42,7 @@ describe CrystaLXD::Container do
           op = container.exec_websocket exec do |stdin_ws|
             stdin_ws.send "input"
           end
-          op.wait.noerr!
+          op.noerr!
         end
       end
 
