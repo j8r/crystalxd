@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.30.1">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "../";
+</script>
+
+  <meta id="repository-name" content="github.com/j8r/crystalxd">
+  <title>CrystaLXD::Container - github.com/j8r/crystalxd</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/j8r/crystalxd/CrystaLXD" data-name="crystalxd">
+      <a href="../CrystaLXD.html">CrystaLXD</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/j8r/crystalxd/CrystaLXD/BackgroundOperation" data-name="crystalxd::backgroundoperation">
+      <a href="../CrystaLXD/BackgroundOperation.html">BackgroundOperation</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/BackgroundOperation/Resources" data-name="crystalxd::backgroundoperation::resources">
+      <a href="../CrystaLXD/BackgroundOperation/Resources.html">Resources</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/j8r/crystalxd/CrystaLXD/Client" data-name="crystalxd::client">
+      <a href="../CrystaLXD/Client.html">Client</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/j8r/crystalxd/CrystaLXD/Client/Information" data-name="crystalxd::client::information">
+      <a href="../CrystaLXD/Client/Information.html">Information</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Client/Information/APIStatus" data-name="crystalxd::client::information::apistatus">
+      <a href="../CrystaLXD/Client/Information/APIStatus.html">APIStatus</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Client/Information/Environment" data-name="crystalxd::client::information::environment">
+      <a href="../CrystaLXD/Client/Information/Environment.html">Environment</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Config" data-name="crystalxd::config">
+      <a href="../CrystaLXD/Config.html">Config</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/j8r/crystalxd/CrystaLXD/Container" data-name="crystalxd::container">
+      <a href="../CrystaLXD/Container.html">Container</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Action" data-name="crystalxd::container::action">
+      <a href="../CrystaLXD/Container/Action.html">Action</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Base" data-name="crystalxd::container::base">
+      <a href="../CrystaLXD/Container/Base.html">Base</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Configuration" data-name="crystalxd::container::configuration">
+      <a href="../CrystaLXD/Container/Configuration.html">Configuration</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Exec" data-name="crystalxd::container::exec">
+      <a href="../CrystaLXD/Container/Exec.html">Exec</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Information" data-name="crystalxd::container::information">
+      <a href="../CrystaLXD/Container/Information.html">Information</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Source" data-name="crystalxd::container::source">
+      <a href="../CrystaLXD/Container/Source.html">Source</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Source/Copy" data-name="crystalxd::container::source::copy">
+      <a href="../CrystaLXD/Container/Source/Copy.html">Copy</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Source/Image" data-name="crystalxd::container::source::image">
+      <a href="../CrystaLXD/Container/Source/Image.html">Image</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Source/Image/Mode" data-name="crystalxd::container::source::image::mode">
+      <a href="../CrystaLXD/Container/Source/Image/Mode.html">Mode</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Source/Image/Protocol" data-name="crystalxd::container::source::image::protocol">
+      <a href="../CrystaLXD/Container/Source/Image/Protocol.html">Protocol</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Source/Migration" data-name="crystalxd::container::source::migration">
+      <a href="../CrystaLXD/Container/Source/Migration.html">Migration</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Source/Migration/Mode" data-name="crystalxd::container::source::migration::mode">
+      <a href="../CrystaLXD/Container/Source/Migration/Mode.html">Mode</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Source/Migration/Secrets" data-name="crystalxd::container::source::migration::secrets">
+      <a href="../CrystaLXD/Container/Source/Migration/Secrets.html">Secrets</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/Source/None" data-name="crystalxd::container::source::none">
+      <a href="../CrystaLXD/Container/Source/None.html">None</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/State" data-name="crystalxd::container::state">
+      <a href="../CrystaLXD/Container/State.html">State</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/State/CPU" data-name="crystalxd::container::state::cpu">
+      <a href="../CrystaLXD/Container/State/CPU.html">CPU</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/State/Disk" data-name="crystalxd::container::state::disk">
+      <a href="../CrystaLXD/Container/State/Disk.html">Disk</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/State/Memory" data-name="crystalxd::container::state::memory">
+      <a href="../CrystaLXD/Container/State/Memory.html">Memory</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/State/Network" data-name="crystalxd::container::state::network">
+      <a href="../CrystaLXD/Container/State/Network.html">Network</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/State/Network/Address" data-name="crystalxd::container::state::network::address">
+      <a href="../CrystaLXD/Container/State/Network/Address.html">Address</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Container/State/Network/Counter" data-name="crystalxd::container::state::network::counter">
+      <a href="../CrystaLXD/Container/State/Network/Counter.html">Counter</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Empty" data-name="crystalxd::empty">
+      <a href="../CrystaLXD/Empty.html">Empty</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/j8r/crystalxd/CrystaLXD/Error" data-name="crystalxd::error">
+      <a href="../CrystaLXD/Error.html">Error</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Error/Code" data-name="crystalxd::error::code">
+      <a href="../CrystaLXD/Error/Code.html">Code</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Exception" data-name="crystalxd::exception">
+      <a href="../CrystaLXD/Exception.html">Exception</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Operation" data-name="crystalxd::operation">
+      <a href="../CrystaLXD/Operation.html">Operation</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/j8r/crystalxd/CrystaLXD/Success" data-name="crystalxd::success(t)">
+      <a href="../CrystaLXD/Success.html">Success</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Success/Code" data-name="crystalxd::success::code">
+      <a href="../CrystaLXD/Success/Code.html">Code</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/j8r/crystalxd/CrystaLXD/Success/Operation" data-name="crystalxd::success::operation">
+      <a href="../CrystaLXD/Success/Operation.html">Operation</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">struct</span> CrystaLXD::Container
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../CrystaLXD/Container.html">CrystaLXD::Container</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>Overview</h2>
+
+  <p>https://github.com/lxc/lxd/blob/master/doc/rest-api.md#10containers</p>
+
+<p>This object is instantiated through <code><a href="../CrystaLXD/Client.html#container(name:String):Container-instance-method">CrystaLXD::Client#container</a></code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L5" target="_blank">
+        client/container.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(client:Client,name:String)-class-method" class="signature"><strong>.new</strong>(client : Client, name : String)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#create(source:Source::Image%7CSource::Copy%7CSource::Migration%7CSource::None,configuration:Configuration=Configuration.new):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method" class="signature"><strong>#create</strong>(source : Source::Image | Source::Copy | Source::Migration | Source::None, configuration : Configuration = <span class="t">Configuration</span>.<span class="k">new</span>) : CrystaLXD::Success(BackgroundOperation) | Error</a>
+        
+          <div class="summary"><p>Creates a new container (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#post-optional-targetmember).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#delete:CrystaLXD::Success(BackgroundOperation)%7CError-instance-method" class="signature"><strong>#delete</strong> : CrystaLXD::Success(BackgroundOperation) | Error</a>
+        
+          <div class="summary"><p>Removes this container (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#delete-1).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#exec_direct(exec:Exec):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method" class="signature"><strong>#exec_direct</strong>(exec : Exec) : CrystaLXD::Success(BackgroundOperation) | Error</a>
+        
+          <div class="summary"><p>Runs a remote command directly, without any wait for websocket connection (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#10containersnameexec).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#exec_websocket(exec:Exec,&block):CrystaLXD::Success(CrystaLXD::BackgroundOperation)%7CError-instance-method" class="signature"><strong>#exec_websocket</strong>(exec : Exec, &block) : CrystaLXD::Success(CrystaLXD::BackgroundOperation) | Error</a>
+        
+          <div class="summary"><p>Runs a remote command and wait for a websocket connection before starting the process (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#10containersnameexec).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#freeze(timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method" class="signature"><strong>#freeze</strong>(timeout : Int32? = <span class="n">nil</span>) : CrystaLXD::Success(BackgroundOperation) | Error</a>
+        
+          <div class="summary"><p>Freezes this container (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#information:CrystaLXD::Success(Information)%7CError-instance-method" class="signature"><strong>#information</strong> : CrystaLXD::Success(Information) | Error</a>
+        
+          <div class="summary"><p>Returns container configuration and current state (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#get-5).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#name:String-instance-method" class="signature"><strong>#name</strong> : String</a>
+        
+          <div class="summary"><p>64 chars max, ASCII, no slash, no colon and no comma.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#rename(new_name:String):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method" class="signature"><strong>#rename</strong>(new_name : String) : CrystaLXD::Success(BackgroundOperation) | Error</a>
+        
+          <div class="summary"><p>Renames this container (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#post-optional-targetmember-1).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#replace_config(configuration:Configuration):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method" class="signature"><strong>#replace_config</strong>(configuration : Configuration) : CrystaLXD::Success(BackgroundOperation) | Error</a>
+        
+          <div class="summary"><p>Replaces container configuration (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-etag-supported-2).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#restart(force:Bool=true,timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method" class="signature"><strong>#restart</strong>(force : Bool = <span class="n">true</span>, timeout : Int32? = <span class="n">nil</span>) : CrystaLXD::Success(BackgroundOperation) | Error</a>
+        
+          <div class="summary"><p>Restarts this container (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#restore_snapshot(snapshot_name:String):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method" class="signature"><strong>#restore_snapshot</strong>(snapshot_name : String) : CrystaLXD::Success(BackgroundOperation) | Error</a>
+        
+          <div class="summary"><p>Restores a snapshot (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-etag-supported-2).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#start(stateful:Bool=false,timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method" class="signature"><strong>#start</strong>(stateful : Bool = <span class="n">false</span>, timeout : Int32? = <span class="n">nil</span>) : CrystaLXD::Success(BackgroundOperation) | Error</a>
+        
+          <div class="summary"><p>Starts this container (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#state:CrystaLXD::Success(State)%7CError-instance-method" class="signature"><strong>#state</strong> : CrystaLXD::Success(State) | Error</a>
+        
+          <div class="summary"><p>Returns the current state (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#get-9).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#stop(force:Bool=true,stateful:Bool=false,timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method" class="signature"><strong>#stop</strong>(force : Bool = <span class="n">true</span>, stateful : Bool = <span class="n">false</span>, timeout : Int32? = <span class="n">nil</span>) : CrystaLXD::Success(BackgroundOperation) | Error</a>
+        
+          <div class="summary"><p>Stops this container (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#unfreeze(timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method" class="signature"><strong>#unfreeze</strong>(timeout : Int32? = <span class="n">nil</span>) : CrystaLXD::Success(BackgroundOperation) | Error</a>
+        
+          <div class="summary"><p>Unfreezes this container (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#update_config(configuration:Configuration):CrystaLXD::Success(Empty)%7CError-instance-method" class="signature"><strong>#update_config</strong>(configuration : Configuration) : CrystaLXD::Success(Empty) | Error</a>
+        
+          <div class="summary"><p>Updates container configuration (https://github.com/lxc/lxd/blob/master/doc/rest-api.md#patch-etag-supported-2).</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="new(client:Client,name:String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(client : <a href="../CrystaLXD/Client.html">Client</a>, name : String)
+
+        <a class="method-permalink" href="#new(client:Client,name:String)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="create(source:Source::Image|Source::Copy|Source::Migration|Source::None,configuration:Configuration=Configuration.new):CrystaLXD::Success(BackgroundOperation)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>create</strong>(source : <a href="../CrystaLXD/Container/Source/Image.html">Source::Image</a> | <a href="../CrystaLXD/Container/Source/Copy.html">Source::Copy</a> | <a href="../CrystaLXD/Container/Source/Migration.html">Source::Migration</a> | <a href="../CrystaLXD/Container/Source/None.html">Source::None</a>, configuration : <a href="../CrystaLXD/Container/Configuration.html">Configuration</a> = <span class="t">Configuration</span>.<span class="k">new</span>) : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/BackgroundOperation.html">BackgroundOperation</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#create(source:Source::Image%7CSource::Copy%7CSource::Migration%7CSource::None,configuration:Configuration=Configuration.new):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Creates a new container
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#post-optional-targetmember).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete:CrystaLXD::Success(BackgroundOperation)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>delete</strong> : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/BackgroundOperation.html">BackgroundOperation</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#delete:CrystaLXD::Success(BackgroundOperation)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Removes this container
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#delete-1).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L142" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="exec_direct(exec:Exec):CrystaLXD::Success(BackgroundOperation)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>exec_direct</strong>(exec : <a href="../CrystaLXD/Container/Exec.html">Exec</a>) : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/BackgroundOperation.html">BackgroundOperation</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#exec_direct(exec:Exec):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Runs a remote command directly, without any wait for websocket connection
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#10containersnameexec).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="exec_websocket(exec:Exec,&amp;block):CrystaLXD::Success(CrystaLXD::BackgroundOperation)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>exec_websocket</strong>(exec : <a href="../CrystaLXD/Container/Exec.html">Exec</a>, &block) : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/BackgroundOperation.html">CrystaLXD::BackgroundOperation</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#exec_websocket(exec:Exec,&block):CrystaLXD::Success(CrystaLXD::BackgroundOperation)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Runs a remote command and wait for a websocket connection before starting the process
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#10containersnameexec).</p>
+
+<p>Yields the stdin and control websockets (in this order).</p>
+
+<p>The control websocket can be used to send out-of-band messages during an exec session.
+This is currently used for window size changes and for forwarding of signals.</p>
+
+<pre><code><span class="k">require</span> <span class="s">&quot;crystalxd&quot;</span>
+
+exec <span class="o">=</span> <span class="t">CrystaLXD</span><span class="t">::</span><span class="t">Container</span><span class="t">::</span><span class="t">Exec</span>.<span class="k">new</span> command: [<span class="s">&quot;/bin/ls&quot;</span>], cwd: <span class="s">&quot;/&quot;</span>
+exec.on_stdout <span class="k">do</span> <span class="o">|</span>bytes<span class="o">|</span>
+  <span class="t">STDOUT</span>.write bytes
+<span class="k">end</span>
+mycontainer.exec_websocket exec <span class="k">do</span> <span class="o">|</span>stdin_ws, contol_ws<span class="o">|</span>
+<span class="k">end</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L57" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="freeze(timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>freeze</strong>(timeout : Int32? = <span class="n">nil</span>) : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/BackgroundOperation.html">BackgroundOperation</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#freeze(timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Freezes this container
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L172" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="information:CrystaLXD::Success(Information)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>information</strong> : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/Container/Information.html">Information</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#information:CrystaLXD::Success(Information)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns container configuration and current state
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#get-5).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L112" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="name:String-instance-method">
+      <div class="signature">
+        
+        def <strong>name</strong> : String
+
+        <a class="method-permalink" href="#name:String-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>64 chars max, ASCII, no slash, no colon and no comma.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="rename(new_name:String):CrystaLXD::Success(BackgroundOperation)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>rename</strong>(new_name : String) : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/BackgroundOperation.html">BackgroundOperation</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#rename(new_name:String):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Renames this container
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#post-optional-targetmember-1).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L130" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="replace_config(configuration:Configuration):CrystaLXD::Success(BackgroundOperation)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>replace_config</strong>(configuration : <a href="../CrystaLXD/Container/Configuration.html">Configuration</a>) : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/BackgroundOperation.html">BackgroundOperation</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#replace_config(configuration:Configuration):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Replaces container configuration
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-etag-supported-2).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L118" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="restart(force:Bool=true,timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>restart</strong>(force : Bool = <span class="n">true</span>, timeout : Int32? = <span class="n">nil</span>) : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/BackgroundOperation.html">BackgroundOperation</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#restart(force:Bool=true,timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Restarts this container
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L154" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="restore_snapshot(snapshot_name:String):CrystaLXD::Success(BackgroundOperation)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>restore_snapshot</strong>(snapshot_name : String) : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/BackgroundOperation.html">BackgroundOperation</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#restore_snapshot(snapshot_name:String):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Restores a snapshot
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-etag-supported-2).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L136" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="start(stateful:Bool=false,timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>start</strong>(stateful : Bool = <span class="n">false</span>, timeout : Int32? = <span class="n">nil</span>) : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/BackgroundOperation.html">BackgroundOperation</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#start(stateful:Bool=false,timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Starts this container
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L160" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="state:CrystaLXD::Success(State)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>state</strong> : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/Container/State.html">State</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#state:CrystaLXD::Success(State)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns the current state
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#get-9).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L148" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="stop(force:Bool=true,stateful:Bool=false,timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>stop</strong>(force : Bool = <span class="n">true</span>, stateful : Bool = <span class="n">false</span>, timeout : Int32? = <span class="n">nil</span>) : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/BackgroundOperation.html">BackgroundOperation</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#stop(force:Bool=true,stateful:Bool=false,timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Stops this container
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L166" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="unfreeze(timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>unfreeze</strong>(timeout : Int32? = <span class="n">nil</span>) : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/BackgroundOperation.html">BackgroundOperation</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#unfreeze(timeout:Int32?=nil):CrystaLXD::Success(BackgroundOperation)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Unfreezes this container
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#put-1).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L178" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="update_config(configuration:Configuration):CrystaLXD::Success(Empty)|Error-instance-method">
+      <div class="signature">
+        
+        def <strong>update_config</strong>(configuration : <a href="../CrystaLXD/Container/Configuration.html">Configuration</a>) : <a href="../CrystaLXD/Success.html">CrystaLXD::Success</a>(<a href="../CrystaLXD/Empty.html">Empty</a>) | <a href="../CrystaLXD/Error.html">Error</a>
+
+        <a class="method-permalink" href="#update_config(configuration:Configuration):CrystaLXD::Success(Empty)%7CError-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Updates container configuration
+(https://github.com/lxc/lxd/blob/master/doc/rest-api.md#patch-etag-supported-2).</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/j8r/crystalxd/blob/dd869ea20fe005aa6efd587b012c3b68cf529431/src/client/container.cr#L124" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
