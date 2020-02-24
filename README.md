@@ -87,4 +87,4 @@ but there is no guarantees of any kind.
 
 ## License
 
-Copyright (c) 2019 Julien Reichardt - ISC License
+Copyright (c) 2019-2020 Julien Reichardt - ISC License
